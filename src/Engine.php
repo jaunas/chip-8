@@ -27,8 +27,6 @@ class Engine
     /** @var Registers */
     public $registers;
 
-    const REGISTERS_SIZE = 16;
-
     /** @var Screen */
     public $screen;
 
@@ -40,6 +38,9 @@ class Engine
 
     /** @var int */
     public $delayTimer;
+
+    /** @var int */
+    private $soundTimer;
 
     public function __construct()
     {
@@ -65,5 +66,20 @@ class Engine
     public function loadProgramToMemory(GenericMemory $program)
     {
         $this->memory->loadProgram($program);
+    }
+
+    public function updateTimers()
+    {
+        if ($this->delayTimer > 0) {
+            $this->delayTimer--;
+        }
+
+        if ($this->soundTimer > 0) {
+            if ($this->soundTimer == 1) {
+                echo 'BEEP';
+            }
+
+            $this->soundTimer--;
+        }
     }
 }

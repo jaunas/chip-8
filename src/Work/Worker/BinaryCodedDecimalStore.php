@@ -12,7 +12,7 @@ use Jaunas\Chip8\Engine;
  * representation of VX, place the hundreds digit in memory at location in I, the tens digit at location I+1, and the
  * ones digit at location I+2.)
  */
-class BinaryCodedDecimaleStore implements WorkerInterface
+class BinaryCodedDecimalStore implements WorkerInterface
 {
 
     public function match(Opcode $opcode): bool

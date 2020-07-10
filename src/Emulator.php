@@ -3,19 +3,10 @@
 namespace Jaunas\Chip8;
 
 use Jaunas\Chip8\DataType\GenericMemory;
-use Jaunas\Chip8\DataType\Memory;
-use Jaunas\Chip8\DataType\Screen;
 use Jaunas\Chip8\Work\Dispatcher;
 
 final class Emulator
 {
-
-    /** @var Screen */
-    private $screen;
-
-
-    /** @var int */
-    private $soundTimer;
 
     /** @var Engine */
     private $engine;
@@ -26,7 +17,6 @@ final class Emulator
     public function __construct()
     {
         $this->engine = new Engine();
-        $this->screen = new Screen();
         $this->dispatcher = new Dispatcher();
     }
 
@@ -44,21 +34,6 @@ final class Emulator
     private function cycle()
     {
         $this->dispatcher->dispatch($this->engine->fetchOpcode(), $this->engine);
-        $this->updateTimers();
-    }
-
-    private function updateTimers()
-    {
-        if ($this->delayTimer > 0) {
-            $this->delayTimer--;
-        }
-
-        if ($this->soundTimer > 0) {
-            if ($this->soundTimer == 1) {
-                echo 'BEEP';
-            }
-
-            $this->soundTimer--;
-        }
+        $this->engine->updateTimers();
     }
 }
