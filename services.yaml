@@ -1,0 +1,18 @@
+services:
+
+  _defaults:
+    autowire: true
+    public: false
+
+  Symfony\Component\Console\Application:
+    class: Symfony\Component\Console\Application
+    public: true
+    calls:
+      - [add, ['@Jaunas\Chip8\Command\Run']]
+
+  Jaunas\Chip8\Command\Run:
+    class: Jaunas\Chip8\Command\Run
+
+  Jaunas\Chip8\Work\Dispatcher:
+    class: Jaunas\Chip8\Work\Dispatcher
+
