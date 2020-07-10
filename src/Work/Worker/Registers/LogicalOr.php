@@ -1,15 +1,16 @@
 <?php
 
-namespace Jaunas\Chip8\Work\Worker;
+namespace Jaunas\Chip8\Work\Worker\Registers;
 
 use Jaunas\Chip8\DataType\Opcode;
 use Jaunas\Chip8\Engine;
+use Jaunas\Chip8\Work\Worker\WorkerInterface;
 
 /**
  * Opcode 8XY1
  * Sets VX to VX or VY. (Bitwise OR operation)
  */
-class RegistersOr implements WorkerInterface
+class LogicalOr implements WorkerInterface
 {
 
     public function match(Opcode $opcode): bool

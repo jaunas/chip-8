@@ -1,15 +1,16 @@
 <?php
 
-namespace Jaunas\Chip8\Work\Worker;
+namespace Jaunas\Chip8\Work\Worker\Jump;
 
 use Jaunas\Chip8\DataType\Opcode;
 use Jaunas\Chip8\Engine;
+use Jaunas\Chip8\Work\Worker\WorkerInterface;
 
 /**
  * Opcode 1NNN
  * Jumps to address NNN.
  */
-class JumpTo implements WorkerInterface
+class To implements WorkerInterface
 {
 
     public function match(Opcode $opcode): bool

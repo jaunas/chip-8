@@ -1,15 +1,16 @@
 <?php
 
-namespace Jaunas\Chip8\Work\Worker;
+namespace Jaunas\Chip8\Work\Worker\Register;
 
 use Jaunas\Chip8\DataType\Opcode;
 use Jaunas\Chip8\Engine;
+use Jaunas\Chip8\Work\Worker\WorkerInterface;
 
 /**
  * Opcode 7XNN
  * Adds NN to VX. (Carry flag is not changed)
  */
-class RegisterAdd implements WorkerInterface
+class Add implements WorkerInterface
 {
 
     public function match(Opcode $opcode): bool

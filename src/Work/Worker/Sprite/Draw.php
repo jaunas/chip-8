@@ -1,10 +1,11 @@
 <?php
 
-namespace Jaunas\Chip8\Work\Worker;
+namespace Jaunas\Chip8\Work\Worker\Sprite;
 
 use Jaunas\Chip8\DataType\Opcode;
 use Jaunas\Chip8\DataType\Registers;
 use Jaunas\Chip8\Engine;
+use Jaunas\Chip8\Work\Worker\WorkerInterface;
 
 /**
  * Opcode DXYN
@@ -14,7 +15,7 @@ use Jaunas\Chip8\Engine;
  * As described above, VF is set to 1 if any screen pixels are flipped from set to unset when the sprite is drawn, and
  * to 0 if that doesn’t happen
  */
-class SpriteDraw implements WorkerInterface
+class Draw implements WorkerInterface
 {
 
     public function match(Opcode $opcode): bool

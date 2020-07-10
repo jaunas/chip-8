@@ -1,27 +1,28 @@
 <?php
 
-namespace Jaunas\Chip8\Work\Worker;
+namespace Jaunas\Chip8\Work\Worker\Register;
 
 use Jaunas\Chip8\DataType\Opcode;
 use Jaunas\Chip8\DataType\Registers;
 use Jaunas\Chip8\Engine;
+use Jaunas\Chip8\Work\Worker\WorkerInterface;
 
 /**
- * Opcode 8XY6
+ * Opcode 8XYE
  * Stores the least significant bit of VX in VF and then shifts VX to the right by 1.
  */
-class RegisterShiftRight implements WorkerInterface
+class ShiftLeft implements WorkerInterface
 {
 
     public function match(Opcode $opcode): bool
     {
-        return $opcode->match(0xF00F, 0x8006);
+        return $opcode->match(0xF00F, 0x800E);
     }
 
     public function execute(Opcode $opcode, Engine $engine)
     {
-        $engine->registers[Registers::CARRY] = $engine->registers[$opcode->getX()] & 0x1;
-        $engine->registers[$opcode->getX()] >>= 1;
+        $engine->registers[Registers::CARRY] = $engine->registers[$opcode->getX()] & 0x80;
+        $engine->registers[$opcode->getX()] <<= 1;
 
         $engine->incrementProgramCounter();
     }

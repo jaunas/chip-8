@@ -1,15 +1,16 @@
 <?php
 
-namespace Jaunas\Chip8\Work\Worker;
+namespace Jaunas\Chip8\Work\Worker\Subroutine;
 
 use Jaunas\Chip8\DataType\Opcode;
 use Jaunas\Chip8\Engine;
+use Jaunas\Chip8\Work\Worker\WorkerInterface;
 
 /**
  * Opcode 2NNN
  * Calls subroutine at NNN.
  */
-class SubroutineCall implements WorkerInterface
+class Call implements WorkerInterface
 {
 
     public function match(Opcode $opcode): bool

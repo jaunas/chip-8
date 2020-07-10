@@ -1,15 +1,16 @@
 <?php
 
-namespace Jaunas\Chip8\Work\Worker;
+namespace Jaunas\Chip8\Work\Worker\Registers;
 
 use Jaunas\Chip8\DataType\Opcode;
 use Jaunas\Chip8\Engine;
+use Jaunas\Chip8\Work\Worker\WorkerInterface;
 
 /**
  * Opcode 5XY0
  * Skips the next instruction if VX equals VY. (Usually the next instruction is a jump to skip a code block)
  */
-class RegistersSkipEqual implements WorkerInterface
+class SkipEqual implements WorkerInterface
 {
 
     public function match(Opcode $opcode): bool

@@ -1,15 +1,16 @@
 <?php
 
-namespace Jaunas\Chip8\Work\Worker;
+namespace Jaunas\Chip8\Work\Worker\IndexRegister;
 
 use Jaunas\Chip8\DataType\Opcode;
 use Jaunas\Chip8\Engine;
+use Jaunas\Chip8\Work\Worker\WorkerInterface;
 
 /**
- * Opcode ANNN
- * Sets index register to the address NNN.
+ * Opcode FX1E
+ * Adds VX to I. VF is not affected.
  */
-class IndexRegisterSet implements WorkerInterface
+class Add implements WorkerInterface
 {
 
     public function match(Opcode $opcode): bool
@@ -19,7 +20,8 @@ class IndexRegisterSet implements WorkerInterface
 
     public function execute(Opcode $opcode, Engine $engine)
     {
-        $engine->indexRegister = $opcode->getNNN();
+        $engine->indexRegister = ($engine->indexRegister + $engine->registers[$opcode->getX()]) % (1 << 16);
+
         $engine->incrementProgramCounter();
     }
 }

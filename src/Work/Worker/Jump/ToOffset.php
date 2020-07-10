@@ -1,15 +1,16 @@
 <?php
 
-namespace Jaunas\Chip8\Work\Worker;
+namespace Jaunas\Chip8\Work\Worker\Jump;
 
 use Jaunas\Chip8\DataType\Opcode;
 use Jaunas\Chip8\Engine;
+use Jaunas\Chip8\Work\Worker\WorkerInterface;
 
 /**
  * Opcode BNNN
  * Jumps to the address NNN plus V0.
  */
-class JumpToOffset implements WorkerInterface
+class ToOffset implements WorkerInterface
 {
 
     public function match(Opcode $opcode): bool
