@@ -17,7 +17,7 @@ class GenericMemory implements ArrayAccess
     public function __construct(int $size)
     {
         $this->size = $size;
-        $this->memory = str_pad("", $this->size, "\0");
+        $this->format();
     }
 
     public function offsetExists($offset): bool
@@ -83,5 +83,10 @@ class GenericMemory implements ArrayAccess
     public function getBlock(int $offset, int $size): GenericMemory
     {
         return GenericMemory::fromString(substr($this->memory, $offset, $size));
+    }
+
+    public function format()
+    {
+        $this->memory = str_pad("", $this->size, "\0");
     }
 }

@@ -47,4 +47,9 @@ class Opcode
     {
         return $this->opcode % 0x1000;
     }
+
+    public function __toString()
+    {
+        return sprintf("%04X", $this->opcode);
+    }
 }

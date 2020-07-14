@@ -48,6 +48,6 @@ class MemoryTest extends TestCase
 
         $opcode = $memory->fetchOpcode(Memory::PROGRAM_OFFSET);
 
-        $this->assertEquals(0xBADC, $opcode);
+        $this->assertEquals(0xBADC, $opcode->getRaw());
     }
 }
