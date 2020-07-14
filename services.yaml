@@ -13,3 +13,7 @@ services:
     calls:
       - [add, ['@Jaunas\Chip8\Command\Run']]
       - [add, ['@Jaunas\Chip8\Command\Test']]
+
+  Jaunas\Chip8\Work\Worker\:
+    resource: 'src/Work/Worker/*'
+    tags: { name: 'dispatcher.worker' }
