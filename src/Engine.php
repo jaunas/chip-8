@@ -49,6 +49,7 @@ class Engine
         $this->registers = new Registers();
         $this->screen = new Screen();
         $this->keypad = new Keypad();
+        $this->terminal = new Terminal();
 
         srand(time());
     }

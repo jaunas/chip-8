@@ -28,12 +28,16 @@ final class Emulator
 
     public function run()
     {
-        $this->cycle();
+        while (true) {
+            $this->cycle();
+            usleep(100000);
+        }
     }
 
     private function cycle()
     {
         $this->dispatcher->dispatch($this->engine->fetchOpcode(), $this->engine);
         $this->engine->updateTimers();
+        $this->engine->terminal->refreshScreen($this->engine->screen);
     }
 }

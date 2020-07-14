@@ -8,7 +8,8 @@
         "symfony/dependency-injection": "^5.1",
         "symfony/config": "^5.1",
         "symfony/yaml": "^5.1",
-        "wapmorgan/ncursesobjects": "^0.9.7"
+        "wapmorgan/ncursesobjects": "^0.9.7",
+        "ext-ncurses": "*"
     },
     "license": "MIT",
     "authors": [

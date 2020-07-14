@@ -3,53 +3,42 @@
 namespace Jaunas\Chip8;
 
 use Jaunas\Chip8\DataType\Screen;
-use wapmorgan\NcursesObjects\Ncurses;
-use wapmorgan\NcursesObjects\Window;
 
 class Terminal
 {
 
-    private const KEY_TIMEOUT = 100;
-
-    /** @var Ncurses */
-    private $ncurses;
-
-    /** @var Window */
+    /** @var resource */
     private $window;
 
     public function __construct()
     {
-        $this->ncurses = new Ncurses();
+        ncurses_init();
+        ncurses_noecho();
+        ncurses_curs_set(0);
+        ncurses_refresh();
+        $this->window = ncurses_newwin(Screen::HEIGHT + 2, Screen::WIDTH + 2, 0, 0);
+        ncurses_wborder($this->window, 0, 0, 0, 0, 0, 0, 0, 0);
+        ncurses_wrefresh($this->window);
+    }
 
-        $this->ncurses
-            ->setEchoState(false)
-            ->setNewLineTranslationState(true)
-            ->setCursorState(Ncurses::CURSOR_INVISIBLE)
-            ->refresh();
-
-        $mainWindow = new Window();
-        $mainWindow
-            ->border()
-            ->title('Haju!')
-            ->refresh();
-
-        $this->window = Window::createCenteredOf($mainWindow, 64, 32);
-        $this->window
-            ->border()
-            ->refresh()
-        ;
+    public function __destruct()
+    {
+        ncurses_end();
     }
 
     public function refreshScreen(Screen $screen)
     {
         $y = 0;
         foreach ($screen->getLines() as $line) {
-            $this->window
-                ->moveCursor(0, $y)
-                ->drawStringHere($this->convertLine($line));
+            ncurses_wmove($this->window, $y+1, 1);
+            ncurses_wattron($this->window, 0);
+            ncurses_waddstr($this->window, $this->convertLine($line));
+            ncurses_wattroff($this->window, 0);
+
+            $y++;
         }
 
-        $this->window->refresh();
+        ncurses_wrefresh($this->window);
     }
 
     private function convertLine(string $line): string
@@ -59,6 +48,6 @@ class Terminal
 
     public function getPressedKey(): int
     {
-        return $this->ncurses->getCh();
+        return ncurses_getch();
     }
 }
