@@ -9,15 +9,15 @@ final class Emulator
 {
 
     /** @var Engine */
-    private $engine;
+    public $engine;
 
     /** @var Dispatcher */
     private $dispatcher;
 
-    public function __construct()
+    public function __construct(Engine $engine, Dispatcher $dispatcher)
     {
-        $this->engine = new Engine();
-        $this->dispatcher = new Dispatcher();
+        $this->engine = $engine;
+        $this->dispatcher = $dispatcher;
     }
 
     public function loadProgramFromFile(string $filepath)

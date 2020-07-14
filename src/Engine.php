@@ -42,14 +42,20 @@ class Engine
     /** @var int */
     private $soundTimer;
 
-    public function __construct()
-    {
-        $this->memory = new Memory();
-        $this->stack = new Stack();
-        $this->registers = new Registers();
-        $this->screen = new Screen();
-        $this->keypad = new Keypad();
-        $this->terminal = new Terminal();
+    public function __construct(
+        Memory $memory,
+        Stack $stack,
+        Registers $registers,
+        Screen $screen,
+        Keypad $keypad,
+        Terminal $terminal
+    ) {
+        $this->memory = $memory;
+        $this->stack = $stack;
+        $this->registers = $registers;
+        $this->screen = $screen;
+        $this->keypad = $keypad;
+        $this->terminal = $terminal;
 
         srand(time());
     }

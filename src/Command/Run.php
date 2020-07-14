@@ -13,6 +13,16 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class Run extends Command
 {
+
+    private $emulator;
+
+    public function __construct(Emulator $emulator)
+    {
+        $this->emulator = $emulator;
+
+        parent::__construct();
+    }
+
     protected function configure()
     {
         $this
@@ -24,9 +34,8 @@ class Run extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $emulator = new Emulator();
-        $emulator->loadProgramFromFile($input->getArgument('file'));
-        $emulator->run();
+        $this->emulator->loadProgramFromFile($input->getArgument('file'));
+        $this->emulator->run();
 
         return 0;
     }

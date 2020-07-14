@@ -3,11 +3,15 @@
 
 require __DIR__.'/vendor/autoload.php';
 
-use Jaunas\Chip8\Command\Run;
-use Jaunas\Chip8\Command\Test;
+use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Console\Application;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
-$application = new Application();
-$application->add(new Run());
-$application->add(new Test());
+$containerBuilder = new ContainerBuilder();
+$loader = new YamlFileLoader($containerBuilder, new FileLocator(__DIR__));
+$loader->load('services.yaml');
+$containerBuilder->compile();
+
+$application = $containerBuilder->get(Application::class);
 $application->run();
