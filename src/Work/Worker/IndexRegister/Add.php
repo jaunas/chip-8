@@ -15,7 +15,7 @@ class Add implements WorkerInterface
 
     public function match(Opcode $opcode): bool
     {
-        return $opcode->match(0xF000, 0xA000);
+        return $opcode->match(0xF0FF, 0xF01E);
     }
 
     public function execute(Opcode $opcode, Engine $engine)

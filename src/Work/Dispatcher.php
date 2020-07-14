@@ -4,6 +4,7 @@ namespace Jaunas\Chip8\Work;
 
 use Jaunas\Chip8\DataType\Opcode;
 use Jaunas\Chip8\Engine;
+use Jaunas\Chip8\Exception\UnknownOpcode;
 use Jaunas\Chip8\Work\Worker\WorkerInterface;
 
 class Dispatcher
@@ -29,12 +30,12 @@ class Dispatcher
         foreach ($this->workers as $worker) {
             if ($worker->match($opcode)) {
                 $worker->execute($opcode, $engine);
-            }
 
-            return;
+                return;
+            }
         }
 
-        throw new \Exception(sprintf("No matching worker found for opcode 0x%X", $opcode));
+        throw UnknownOpcode::byOpcode($opcode);
     }
 
     private function getWorkers(): array
@@ -43,6 +44,7 @@ class Dispatcher
             \Jaunas\Chip8\Work\Worker\BinaryCodedDecimalStore::class,
             \Jaunas\Chip8\Work\Worker\DelayTimer\Get::class,
             \Jaunas\Chip8\Work\Worker\DelayTimer\Set::class,
+            \Jaunas\Chip8\Work\Worker\DisplayClear::class,
             \Jaunas\Chip8\Work\Worker\GenerateRandomNumber::class,
             \Jaunas\Chip8\Work\Worker\IndexRegister\Add::class,
             \Jaunas\Chip8\Work\Worker\IndexRegister\Set::class,
