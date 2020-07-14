@@ -89,4 +89,12 @@ class GenericMemory implements ArrayAccess
     {
         $this->memory = str_pad("", $this->size, "\0");
     }
+
+    public function dump()
+    {
+        return array_map(function ($char) {
+            return ord($char);
+        },
+            str_split($this->memory));
+    }
 }

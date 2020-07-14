@@ -17,3 +17,7 @@ services:
   Jaunas\Chip8\Work\Worker\:
     resource: 'src/Work/Worker/*'
     tags: { name: 'dispatcher.worker' }
+
+  Jaunas\Chip8\Emulator:
+    class: Jaunas\Chip8\Emulator
+    public: true

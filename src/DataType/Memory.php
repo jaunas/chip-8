@@ -36,7 +36,7 @@ class Memory extends GenericMemory
 
     private function loadFontSet()
     {
-        $this->insertBlock(GenericMemory::fromString(self::FONT_SET), 0);
+        $this->insertBlock(GenericMemory::fromString(self::FONT_SET), self::FONT_OFFSET);
     }
 
     public function loadProgram(GenericMemory $programCode)

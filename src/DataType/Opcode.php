@@ -25,12 +25,12 @@ class Opcode
 
     public function getX(): int
     {
-        return $this->opcode & 0x0F00 >> 8;
+        return ($this->opcode & 0x0F00) >> 8;
     }
 
     public function getY(): int
     {
-        return $this->opcode & 0x00F0 >> 4;
+        return ($this->opcode & 0x00F0) >> 4;
     }
 
     public function getN(): int
