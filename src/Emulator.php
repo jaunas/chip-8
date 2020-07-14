@@ -28,6 +28,8 @@ final class Emulator
 
     public function run()
     {
+        $this->engine->terminal->open();
+
         while (true) {
             $this->cycle();
             usleep(100000);

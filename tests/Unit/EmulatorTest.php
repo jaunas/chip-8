@@ -22,7 +22,7 @@ class EmulatorTest extends TestCase
         $opcodes = [];
         for ($i=0; $i < strlen($programString) / 2; $i++) {
             $expectedOpcodes[] = $this->opcodeFromString($programString, $i*2);
-            $opcodes[] = $emulator->memory->fetchOpcode(Memory::PROGRAM_OFFSET + $i*2);
+            $opcodes[] = $emulator->engine->memory->fetchOpcode(Memory::PROGRAM_OFFSET + $i*2)->getRaw();
         }
 
         $this->assertEquals($expectedOpcodes, $opcodes);
