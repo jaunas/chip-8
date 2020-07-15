@@ -2,8 +2,6 @@
 
 namespace Jaunas\Chip8\DataType;
 
-use Jaunas\Chip8\Exception\MemoryOutOfBounds;
-
 class Screen extends GenericMemory
 {
     const WIDTH = 64;
@@ -17,7 +15,7 @@ class Screen extends GenericMemory
     public function setPixel(int $x, int $y, int $pixel)
     {
         if ($x >= self::WIDTH || $y >= self::HEIGHT) {
-            throw new MemoryOutOfBounds();
+            return;
         }
 
         $this[$x + $y * self::WIDTH] = $pixel;
@@ -26,7 +24,7 @@ class Screen extends GenericMemory
     public function getPixel(int $x, int $y): int
     {
         if ($x >= self::WIDTH || $y >= self::HEIGHT) {
-            throw new MemoryOutOfBounds();
+            return 0;
         }
 
         return $this[$x + $y * self::WIDTH];
@@ -50,7 +48,7 @@ class Screen extends GenericMemory
         $flipped = false;
 
         for ($i=0; $i<8; $i++) {
-            $change = $line & (0x80 >> $i);
+            $change = (bool) ($line & (0x80 >> $i));
             $oldPixel = $this->getPixel($x+$i, $y);
 
             if ($change == 1) {

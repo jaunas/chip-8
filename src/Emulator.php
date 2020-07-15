@@ -32,7 +32,7 @@ final class Emulator
 
         while (true) {
             $this->cycle();
-            usleep(100000);
+            usleep(1000);
         }
     }
 

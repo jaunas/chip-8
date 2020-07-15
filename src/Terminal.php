@@ -19,7 +19,7 @@ class Terminal
             ncurses_noecho();
             ncurses_curs_set(0);
             ncurses_refresh();
-            $this->window = ncurses_newwin(Screen::HEIGHT + 2, Screen::WIDTH + 2, 0, 0);
+            $this->window = ncurses_newwin(Screen::HEIGHT + 2, (Screen::WIDTH*2) + 2, 0, 0);
             ncurses_wborder($this->window, 0, 0, 0, 0, 0, 0, 0, 0);
             ncurses_wrefresh($this->window);
 
@@ -59,7 +59,7 @@ class Terminal
 
     private function convertLine(string $line): string
     {
-        return str_replace(["\x0", "\x1"], [" ", "█"], $line);
+        return str_replace(["\x0", "\x1"], ["  ", "██"], $line);
     }
 
     public function getPressedKey(): int
