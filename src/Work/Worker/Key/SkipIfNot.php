@@ -3,15 +3,14 @@
 namespace Jaunas\Chip8\Work\Worker\Key;
 
 use Jaunas\Chip8\DataType\Opcode;
-use Jaunas\Chip8\Engine;
-use Jaunas\Chip8\Work\Worker\WorkerInterface;
+use Jaunas\Chip8\Work\Worker\AbstractWorker;
 
 /**
  * Opcode EXA1
  * Skips the next instruction if the key stored in VX isn't pressed. (Usually the next instruction is a jump to skip a
  * code block)
  */
-class SkipIfNot implements WorkerInterface
+final class SkipIfNot extends AbstractWorker
 {
 
     public function match(Opcode $opcode): bool
@@ -19,12 +18,12 @@ class SkipIfNot implements WorkerInterface
         return $opcode->match(0xF0FF, 0xE0A1);
     }
 
-    public function execute(Opcode $opcode, Engine $engine)
+    public function execute(Opcode $opcode)
     {
-        if ($engine->keypad[$opcode->getX()] != 1) {
-            $engine->incrementProgramCounter();
+        if ($this->engine->keypad[$opcode->getX()] != 1) {
+            $this->engine->incrementProgramCounter();
         }
 
-        $engine->incrementProgramCounter();
+        $this->engine->incrementProgramCounter();
     }
 }

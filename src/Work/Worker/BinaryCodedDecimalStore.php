@@ -3,7 +3,6 @@
 namespace Jaunas\Chip8\Work\Worker;
 
 use Jaunas\Chip8\DataType\Opcode;
-use Jaunas\Chip8\Engine;
 
 /**
  * Opcode FX33
@@ -12,7 +11,7 @@ use Jaunas\Chip8\Engine;
  * representation of VX, place the hundreds digit in memory at location in I, the tens digit at location I+1, and the
  * ones digit at location I+2.)
  */
-class BinaryCodedDecimalStore implements WorkerInterface
+final class BinaryCodedDecimalStore extends AbstractWorker
 {
 
     public function match(Opcode $opcode): bool
@@ -20,15 +19,15 @@ class BinaryCodedDecimalStore implements WorkerInterface
         return $opcode->match(0xF0FF, 0xF033);
     }
 
-    public function execute(Opcode $opcode, Engine $engine)
+    public function execute(Opcode $opcode)
     {
-        $number = $engine->registers[$opcode->getX()];
+        $number = $this->engine->registers[$opcode->getX()];
 
-        $index = $engine->indexRegister;
-        $engine->memory[$index] = (int) (($number % 1000) / 100);
-        $engine->memory[$index + 1] = (int) (($number % 100) / 10);
-        $engine->memory[$index + 2] = $number % 10;
+        $index = $this->engine->indexRegister;
+        $this->engine->memory[$index] = (int) (($number % 1000) / 100);
+        $this->engine->memory[$index + 1] = (int) (($number % 100) / 10);
+        $this->engine->memory[$index + 2] = $number % 10;
 
-        $engine->incrementProgramCounter();
+        $this->engine->incrementProgramCounter();
     }
 }

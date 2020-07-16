@@ -3,13 +3,12 @@
 namespace Jaunas\Chip8\Work\Worker;
 
 use Jaunas\Chip8\DataType\Opcode;
-use Jaunas\Chip8\Engine;
 
 /**
  * Opcode 00E0
  * Clears the screen.
  */
-class DisplayClear implements WorkerInterface
+final class DisplayClear extends AbstractWorker
 {
 
     public function match(Opcode $opcode): bool
@@ -17,10 +16,10 @@ class DisplayClear implements WorkerInterface
         return $opcode->match(0xFFFF, 0x00E0);
     }
 
-    public function execute(Opcode $opcode, Engine $engine)
+    public function execute(Opcode $opcode)
     {
-        $engine->screen->format();
+        $this->engine->screen->format();
 
-        $engine->incrementProgramCounter();
+        $this->engine->incrementProgramCounter();
     }
 }

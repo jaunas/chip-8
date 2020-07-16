@@ -3,14 +3,13 @@
 namespace Jaunas\Chip8\Work\Worker\IndexRegister;
 
 use Jaunas\Chip8\DataType\Opcode;
-use Jaunas\Chip8\Engine;
-use Jaunas\Chip8\Work\Worker\WorkerInterface;
+use Jaunas\Chip8\Work\Worker\AbstractWorker;
 
 /**
  * Opcode FX1E
  * Adds VX to I. VF is not affected.
  */
-class Add implements WorkerInterface
+final class Add extends AbstractWorker
 {
 
     public function match(Opcode $opcode): bool
@@ -18,10 +17,11 @@ class Add implements WorkerInterface
         return $opcode->match(0xF0FF, 0xF01E);
     }
 
-    public function execute(Opcode $opcode, Engine $engine)
+    public function execute(Opcode $opcode)
     {
-        $engine->indexRegister = ($engine->indexRegister + $engine->registers[$opcode->getX()]) % (1 << 16);
+        $x = $this->engine->registers[$opcode->getX()];
+        $this->engine->indexRegister = ($this->engine->indexRegister + $x) % (1 << 16);
 
-        $engine->incrementProgramCounter();
+        $this->engine->incrementProgramCounter();
     }
 }

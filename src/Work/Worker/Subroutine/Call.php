@@ -3,14 +3,13 @@
 namespace Jaunas\Chip8\Work\Worker\Subroutine;
 
 use Jaunas\Chip8\DataType\Opcode;
-use Jaunas\Chip8\Engine;
-use Jaunas\Chip8\Work\Worker\WorkerInterface;
+use Jaunas\Chip8\Work\Worker\AbstractWorker;
 
 /**
  * Opcode 2NNN
  * Calls subroutine at NNN.
  */
-class Call implements WorkerInterface
+final class Call extends AbstractWorker
 {
 
     public function match(Opcode $opcode): bool
@@ -18,9 +17,9 @@ class Call implements WorkerInterface
         return $opcode->match(0xF000, 0x2000);
     }
 
-    public function execute(Opcode $opcode, Engine $engine)
+    public function execute(Opcode $opcode)
     {
-        $engine->stack->push($engine->programCounter);
-        $engine->programCounter = $opcode->getNNN();
+        $this->engine->stack->push($this->engine->programCounter);
+        $this->engine->programCounter = $opcode->getNNN();
     }
 }

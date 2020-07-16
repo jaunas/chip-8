@@ -3,13 +3,12 @@
 namespace Jaunas\Chip8\Work\Worker;
 
 use Jaunas\Chip8\DataType\Opcode;
-use Jaunas\Chip8\Engine;
 
 /**
  * Opcode FX18
  * Sets the sound timer to VX.
  */
-class SoundTimerSet implements WorkerInterface
+final class SoundTimerSet extends AbstractWorker
 {
 
     public function match(Opcode $opcode): bool
@@ -17,10 +16,10 @@ class SoundTimerSet implements WorkerInterface
         return $opcode->match(0xF0FF, 0xF018);
     }
 
-    public function execute(Opcode $opcode, Engine $engine)
+    public function execute(Opcode $opcode)
     {
-        $engine->delayTimer = $engine->registers[$opcode->getX()];
+        $this->engine->delayTimer = $this->engine->registers[$opcode->getX()];
 
-        $engine->incrementProgramCounter();
+        $this->engine->incrementProgramCounter();
     }
 }

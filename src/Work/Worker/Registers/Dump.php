@@ -3,15 +3,14 @@
 namespace Jaunas\Chip8\Work\Worker\Registers;
 
 use Jaunas\Chip8\DataType\Opcode;
-use Jaunas\Chip8\Engine;
-use Jaunas\Chip8\Work\Worker\WorkerInterface;
+use Jaunas\Chip8\Work\Worker\AbstractWorker;
 
 /**
  * Opcode FX55
  * Stores V0 to VX (including VX) in memory starting at address I. The offset from I is increased by 1 for each value
  * written, but I itself is left unmodified.
  */
-class Dump implements WorkerInterface
+final class Dump extends AbstractWorker
 {
 
     public function match(Opcode $opcode): bool
@@ -19,12 +18,12 @@ class Dump implements WorkerInterface
         return $opcode->match(0xF0FF, 0xF055);
     }
 
-    public function execute(Opcode $opcode, Engine $engine)
+    public function execute(Opcode $opcode)
     {
         for ($i=0; $i<$opcode->getX(); $i++) {
-            $engine->memory[$engine->indexRegister + $i] = $engine->registers[$i];
+            $this->engine->memory[$this->engine->indexRegister + $i] = $this->engine->registers[$i];
         }
 
-        $engine->incrementProgramCounter();
+        $this->engine->incrementProgramCounter();
     }
 }

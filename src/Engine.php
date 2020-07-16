@@ -30,9 +30,6 @@ class Engine
     /** @var Screen */
     public $screen;
 
-    /** @var Terminal */
-    public $terminal;
-
     /** @var Keypad */
     public $keypad;
 
@@ -47,15 +44,13 @@ class Engine
         Stack $stack,
         Registers $registers,
         Screen $screen,
-        Keypad $keypad,
-        Terminal $terminal
+        Keypad $keypad
     ) {
         $this->memory = $memory;
         $this->stack = $stack;
         $this->registers = $registers;
         $this->screen = $screen;
         $this->keypad = $keypad;
-        $this->terminal = $terminal;
 
         srand(time());
     }

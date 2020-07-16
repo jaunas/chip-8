@@ -33,3 +33,4 @@ TODO
 * Think about refactoring emulator and engine classes
 * Add more tested examples, especially with keypad usage
 * Handle Ctrl-C
+* Debugging tool

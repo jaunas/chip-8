@@ -14,10 +14,14 @@ final class Emulator
     /** @var Dispatcher */
     private $dispatcher;
 
-    public function __construct(Engine $engine, Dispatcher $dispatcher)
+    /** @var Terminal */
+    public $terminal;
+
+    public function __construct(Engine $engine, Dispatcher $dispatcher, Terminal $terminal)
     {
         $this->engine = $engine;
         $this->dispatcher = $dispatcher;
+        $this->terminal = $terminal;
     }
 
     public function loadProgramFromFile(string $filepath)
@@ -28,7 +32,7 @@ final class Emulator
 
     public function run()
     {
-        $this->engine->terminal->open();
+        $this->terminal->open();
 
         while (true) {
             $this->cycle();
@@ -38,8 +42,8 @@ final class Emulator
 
     private function cycle()
     {
-        $this->dispatcher->dispatch($this->engine->fetchOpcode(), $this->engine);
+        $this->dispatcher->dispatch($this->engine->fetchOpcode());
         $this->engine->updateTimers();
-        $this->engine->terminal->refreshScreen($this->engine->screen);
+        $this->terminal->refresh($this->engine);
     }
 }

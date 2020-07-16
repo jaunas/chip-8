@@ -3,14 +3,13 @@
 namespace Jaunas\Chip8\Work\Worker\Jump;
 
 use Jaunas\Chip8\DataType\Opcode;
-use Jaunas\Chip8\Engine;
-use Jaunas\Chip8\Work\Worker\WorkerInterface;
+use Jaunas\Chip8\Work\Worker\AbstractWorker;
 
 /**
  * Opcode 1NNN
  * Jumps to address NNN.
  */
-class To implements WorkerInterface
+final class To extends AbstractWorker
 {
 
     public function match(Opcode $opcode): bool
@@ -18,8 +17,8 @@ class To implements WorkerInterface
         return $opcode->match(0xF000, 0x1000);
     }
 
-    public function execute(Opcode $opcode, Engine $engine)
+    public function execute(Opcode $opcode)
     {
-        $engine->programCounter = $opcode->getNNN();
+        $this->engine->programCounter = $opcode->getNNN();
     }
 }

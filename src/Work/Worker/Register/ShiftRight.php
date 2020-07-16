@@ -4,14 +4,13 @@ namespace Jaunas\Chip8\Work\Worker\Register;
 
 use Jaunas\Chip8\DataType\Opcode;
 use Jaunas\Chip8\DataType\Registers;
-use Jaunas\Chip8\Engine;
-use Jaunas\Chip8\Work\Worker\WorkerInterface;
+use Jaunas\Chip8\Work\Worker\AbstractWorker;
 
 /**
  * Opcode 8XY6
  * Stores the least significant bit of VX in VF and then shifts VX to the right by 1.
  */
-class ShiftRight implements WorkerInterface
+final class ShiftRight extends AbstractWorker
 {
 
     public function match(Opcode $opcode): bool
@@ -19,11 +18,11 @@ class ShiftRight implements WorkerInterface
         return $opcode->match(0xF00F, 0x8006);
     }
 
-    public function execute(Opcode $opcode, Engine $engine)
+    public function execute(Opcode $opcode)
     {
-        $engine->registers[Registers::CARRY] = $engine->registers[$opcode->getX()] & 0x1;
-        $engine->registers[$opcode->getX()] >>= 1;
+        $this->engine->registers[Registers::CARRY] = $this->engine->registers[$opcode->getX()] & 0x1;
+        $this->engine->registers[$opcode->getX()] >>= 1;
 
-        $engine->incrementProgramCounter();
+        $this->engine->incrementProgramCounter();
     }
 }

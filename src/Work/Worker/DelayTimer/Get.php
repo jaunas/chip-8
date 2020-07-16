@@ -3,14 +3,13 @@
 namespace Jaunas\Chip8\Work\Worker\DelayTimer;
 
 use Jaunas\Chip8\DataType\Opcode;
-use Jaunas\Chip8\Engine;
-use Jaunas\Chip8\Work\Worker\WorkerInterface;
+use Jaunas\Chip8\Work\Worker\AbstractWorker;
 
 /**
  * Opcode FX07
  * Sets VX to the value of the delay timer.
  */
-class Get implements WorkerInterface
+final class Get extends AbstractWorker
 {
 
     public function match(Opcode $opcode): bool
@@ -18,10 +17,10 @@ class Get implements WorkerInterface
         return $opcode->match(0xF0FF, 0xF007);
     }
 
-    public function execute(Opcode $opcode, Engine $engine)
+    public function execute(Opcode $opcode)
     {
-        $engine->registers[$opcode->getX()] = $engine->delayTimer;
+        $this->engine->registers[$opcode->getX()] = $this->engine->delayTimer;
 
-        $engine->incrementProgramCounter();
+        $this->engine->incrementProgramCounter();
     }
 }

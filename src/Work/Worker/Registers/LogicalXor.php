@@ -3,14 +3,13 @@
 namespace Jaunas\Chip8\Work\Worker\Registers;
 
 use Jaunas\Chip8\DataType\Opcode;
-use Jaunas\Chip8\Engine;
-use Jaunas\Chip8\Work\Worker\WorkerInterface;
+use Jaunas\Chip8\Work\Worker\AbstractWorker;
 
 /**
  * Opcode 8XY3
  * Sets VX to VX xor VY.
  */
-class LogicalXor implements WorkerInterface
+final class LogicalXor extends AbstractWorker
 {
 
     public function match(Opcode $opcode): bool
@@ -18,9 +17,9 @@ class LogicalXor implements WorkerInterface
         return $opcode->match(0xF00F, 0x8003);
     }
 
-    public function execute(Opcode $opcode, Engine $engine)
+    public function execute(Opcode $opcode)
     {
-        $engine->registers[$opcode->getX()] ^= $engine->registers[$opcode->getY()];
-        $engine->incrementProgramCounter();
+        $this->engine->registers[$opcode->getX()] ^= $this->engine->registers[$opcode->getY()];
+        $this->engine->incrementProgramCounter();
     }
 }

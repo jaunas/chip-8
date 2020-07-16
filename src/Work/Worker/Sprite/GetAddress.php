@@ -3,9 +3,7 @@
 namespace Jaunas\Chip8\Work\Worker\Sprite;
 
 use Jaunas\Chip8\DataType\Opcode;
-use Jaunas\Chip8\DataType\Registers;
-use Jaunas\Chip8\Engine;
-use Jaunas\Chip8\Work\Worker\WorkerInterface;
+use Jaunas\Chip8\Work\Worker\AbstractWorker;
 
 /**
  * Opcode FX29
@@ -13,7 +11,7 @@ use Jaunas\Chip8\Work\Worker\WorkerInterface;
  * Sets I to the location of the sprite for the character in VX. Characters 0-F (in hexadecimal) are represented
  * by a 4x5 font.
  */
-class GetAddress implements WorkerInterface
+final class GetAddress extends AbstractWorker
 {
 
     public function match(Opcode $opcode): bool
@@ -21,15 +19,15 @@ class GetAddress implements WorkerInterface
         return $opcode->match(0xF0FF, 0xF029);
     }
 
-    public function execute(Opcode $opcode, Engine $engine)
+    public function execute(Opcode $opcode)
     {
-        $character = $engine->registers[$opcode->getX()];
+        $character = $this->engine->registers[$opcode->getX()];
         if ($character > 15) {
             $character = 0;
         }
 
-        $engine->indexRegister = $character * 5;
+        $this->engine->indexRegister = $character * 5;
 
-        $engine->incrementProgramCounter();
+        $this->engine->incrementProgramCounter();
     }
 }

@@ -3,14 +3,13 @@
 namespace Jaunas\Chip8\Work\Worker\Register;
 
 use Jaunas\Chip8\DataType\Opcode;
-use Jaunas\Chip8\Engine;
-use Jaunas\Chip8\Work\Worker\WorkerInterface;
+use Jaunas\Chip8\Work\Worker\AbstractWorker;
 
 /**
  * Opcode 7XNN
  * Adds NN to VX. (Carry flag is not changed)
  */
-class Add implements WorkerInterface
+final class Add extends AbstractWorker
 {
 
     public function match(Opcode $opcode): bool
@@ -18,9 +17,9 @@ class Add implements WorkerInterface
         return $opcode->match(0xF000, 0x7000);
     }
 
-    public function execute(Opcode $opcode, Engine $engine)
+    public function execute(Opcode $opcode)
     {
-        $engine->registers[$opcode->getX()] += $opcode->getNN();
-        $engine->incrementProgramCounter();
+        $this->engine->registers[$opcode->getX()] += $opcode->getNN();
+        $this->engine->incrementProgramCounter();
     }
 }

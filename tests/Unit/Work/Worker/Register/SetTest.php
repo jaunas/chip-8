@@ -17,7 +17,13 @@ class SetTest extends TestCase
      */
     public function testMatchFail(int $opcode)
     {
-        $worker = new Set();
+        /** @var Engine|MockObject $engine */
+        $engine = $this
+            ->getMockBuilder(Engine::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $worker = new Set($engine);
         $opcode = new Opcode($opcode);
 
         $this->assertFalse($worker->match($opcode));
@@ -33,11 +39,6 @@ class SetTest extends TestCase
      */
     public function testExecute(int $opcode, int $index, int $value)
     {
-        $worker = new Set();
-        $opcode = new Opcode($opcode);
-
-        $this->assertTrue($worker->match($opcode));
-
         $registers = new Registers();
 
         /** @var Engine|MockObject $engine */
@@ -48,9 +49,14 @@ class SetTest extends TestCase
 
         $engine->registers = $registers;
 
+        $worker = new Set($engine);
+        $opcode = new Opcode($opcode);
+
+        $this->assertTrue($worker->match($opcode));
+
         $expectedDump = array_fill(0, Registers::SIZE, 0);
         $this->assertEquals($expectedDump, $engine->registers->dump());
-        $worker->execute($opcode, $engine);
+        $worker->execute($opcode);
 
         $expectedDump[$index] = $value;
         $this->assertEquals($expectedDump, $engine->registers->dump());

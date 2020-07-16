@@ -3,14 +3,13 @@
 namespace Jaunas\Chip8\Work\Worker\IndexRegister;
 
 use Jaunas\Chip8\DataType\Opcode;
-use Jaunas\Chip8\Engine;
-use Jaunas\Chip8\Work\Worker\WorkerInterface;
+use Jaunas\Chip8\Work\Worker\AbstractWorker;
 
 /**
  * Opcode ANNN
  * Sets index register to the address NNN.
  */
-class Set implements WorkerInterface
+final class Set extends AbstractWorker
 {
 
     public function match(Opcode $opcode): bool
@@ -18,9 +17,9 @@ class Set implements WorkerInterface
         return $opcode->match(0xF000, 0xA000);
     }
 
-    public function execute(Opcode $opcode, Engine $engine)
+    public function execute(Opcode $opcode)
     {
-        $engine->indexRegister = $opcode->getNNN();
-        $engine->incrementProgramCounter();
+        $this->engine->indexRegister = $opcode->getNNN();
+        $this->engine->incrementProgramCounter();
     }
 }

@@ -3,14 +3,13 @@
 namespace Jaunas\Chip8\Work\Worker\Register;
 
 use Jaunas\Chip8\DataType\Opcode;
-use Jaunas\Chip8\Engine;
-use Jaunas\Chip8\Work\Worker\WorkerInterface;
+use Jaunas\Chip8\Work\Worker\AbstractWorker;
 
 /**
  * Opcode 3XNN
  * Skips the next instruction if VX equals NN. (Usually the next instruction is a jump to skip a code block)
  */
-class SkipEqual implements WorkerInterface
+final class SkipEqual extends AbstractWorker
 {
 
     public function match(Opcode $opcode): bool
@@ -18,12 +17,12 @@ class SkipEqual implements WorkerInterface
         return $opcode->match(0xF000, 0x3000);
     }
 
-    public function execute(Opcode $opcode, Engine $engine)
+    public function execute(Opcode $opcode)
     {
-        if ($engine->registers[$opcode->getX()] == $opcode->getNN()) {
-            $engine->incrementProgramCounter();
+        if ($this->engine->registers[$opcode->getX()] == $opcode->getNN()) {
+            $this->engine->incrementProgramCounter();
         }
 
-        $engine->incrementProgramCounter();
+        $this->engine->incrementProgramCounter();
     }
 }
