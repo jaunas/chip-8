@@ -16,7 +16,7 @@ class Load implements WorkerInterface
 
     public function match(Opcode $opcode): bool
     {
-        return $opcode->match(0xF0FF, 0xF055);
+        return $opcode->match(0xF0FF, 0xF065);
     }
 
     public function execute(Opcode $opcode, Engine $engine)
