@@ -30,4 +30,9 @@ final class BinaryCodedDecimalStore extends AbstractWorker
 
         $this->engine->incrementProgramCounter();
     }
+
+    public function getPseudocode(Opcode $opcode): string
+    {
+        return sprintf('*(I+0..2) = BCD(V%s);', $opcode->getX());
+    }
 }

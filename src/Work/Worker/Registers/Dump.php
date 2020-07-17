@@ -26,4 +26,9 @@ final class Dump extends AbstractWorker
 
         $this->engine->incrementProgramCounter();
     }
+
+    public function getPseudocode(Opcode $opcode): string
+    {
+        return sprintf('&I = V0..V%s;', $opcode->getX());
+    }
 }

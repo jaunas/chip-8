@@ -12,7 +12,7 @@ services:
     public: true
     calls:
       - [add, ['@Jaunas\Chip8\Command\Run']]
-      - [add, ['@Jaunas\Chip8\Command\Test']]
+      - [add, ['@Jaunas\Chip8\Command\Translate']]
 
   Jaunas\Chip8\Work\Worker\:
     resource: 'src/Work/Worker/*'

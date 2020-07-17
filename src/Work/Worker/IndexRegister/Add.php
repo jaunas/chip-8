@@ -24,4 +24,9 @@ final class Add extends AbstractWorker
 
         $this->engine->incrementProgramCounter();
     }
+
+    public function getPseudocode(Opcode $opcode): string
+    {
+        return sprintf('I += V%s;', $opcode->getX());
+    }
 }

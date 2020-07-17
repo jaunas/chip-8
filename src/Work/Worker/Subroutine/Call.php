@@ -22,4 +22,9 @@ final class Call extends AbstractWorker
         $this->engine->stack->push($this->engine->programCounter);
         $this->engine->programCounter = $opcode->getNNN();
     }
+
+    public function getPseudocode(Opcode $opcode): string
+    {
+        return sprintf('*(%s)();', $opcode->getNNN());
+    }
 }

@@ -30,4 +30,9 @@ final class GetAddress extends AbstractWorker
 
         $this->engine->incrementProgramCounter();
     }
+
+    public function getPseudocode(Opcode $opcode): string
+    {
+        return sprintf('I = sprite_addr[V%s];', $opcode->getX());
+    }
 }

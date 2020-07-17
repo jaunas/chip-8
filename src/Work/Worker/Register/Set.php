@@ -22,4 +22,9 @@ final class Set extends AbstractWorker
         $this->engine->registers[$opcode->getX()] = $opcode->getNN();
         $this->engine->incrementProgramCounter();
     }
+
+    public function getPseudocode(Opcode $opcode): string
+    {
+        return sprintf('V%s = %s;', $opcode->getX(), $opcode->getNN());
+    }
 }

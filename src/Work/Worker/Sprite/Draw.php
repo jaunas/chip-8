@@ -34,4 +34,9 @@ final class Draw extends AbstractWorker
 
         $this->engine->incrementProgramCounter();
     }
+
+    public function getPseudocode(Opcode $opcode): string
+    {
+        return sprintf('draw(V%s, V%s, %s);', $opcode->getX(), $opcode->getY(), $opcode->getN());
+    }
 }

@@ -34,3 +34,6 @@ TODO
 * Add more tested examples, especially with keypad usage
 * Handle Ctrl-C
 * Debugging tool
+  * Translate code to pseudocode - add json with rom description
+  * Current state shown in separate window
+  * Sprite preview

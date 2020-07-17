@@ -22,4 +22,9 @@ final class Set extends AbstractWorker
         $this->engine->indexRegister = $opcode->getNNN();
         $this->engine->incrementProgramCounter();
     }
+
+    public function getPseudocode(Opcode $opcode): string
+    {
+        return sprintf('I = %s;', $opcode->getNNN());
+    }
 }

@@ -22,4 +22,9 @@ final class ReturnFrom extends AbstractWorker
         $this->engine->programCounter = $this->engine->stack->pop();
         $this->engine->incrementProgramCounter();
     }
+
+    public function getPseudocode(Opcode $opcode): string
+    {
+        return sprintf('return;');
+    }
 }

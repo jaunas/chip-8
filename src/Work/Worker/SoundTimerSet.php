@@ -22,4 +22,9 @@ final class SoundTimerSet extends AbstractWorker
 
         $this->engine->incrementProgramCounter();
     }
+
+    public function getPseudocode(Opcode $opcode): string
+    {
+        return sprintf('sound_timer = V%s;', $opcode->getX());
+    }
 }

@@ -23,4 +23,9 @@ final class Set extends AbstractWorker
 
         $this->engine->incrementProgramCounter();
     }
+
+    public function getPseudocode(Opcode $opcode): string
+    {
+        return sprintf('delay_timer = V%s;', $opcode->getX());
+    }
 }

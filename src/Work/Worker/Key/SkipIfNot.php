@@ -26,4 +26,9 @@ final class SkipIfNot extends AbstractWorker
 
         $this->engine->incrementProgramCounter();
     }
+
+    public function getPseudocode(Opcode $opcode): string
+    {
+        return sprintf('if (V%s != key()) skip;', $opcode->getX());
+    }
 }

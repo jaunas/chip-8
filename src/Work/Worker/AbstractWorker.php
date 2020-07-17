@@ -19,4 +19,6 @@ abstract class AbstractWorker
     abstract public function match(Opcode $opcode): bool;
 
     abstract public function execute(Opcode $opcode);
+
+    abstract public function getPseudocode(Opcode $opcode): string;
 }

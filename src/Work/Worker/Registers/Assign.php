@@ -22,4 +22,9 @@ final class Assign extends AbstractWorker
         $this->engine->registers[$opcode->getX()] = $this->engine->registers[$opcode->getY()];
         $this->engine->incrementProgramCounter();
     }
+
+    public function getPseudocode(Opcode $opcode): string
+    {
+        return sprintf('V%s = V%s;', $opcode->getX(), $opcode->getY());
+    }
 }

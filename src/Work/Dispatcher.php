@@ -19,11 +19,15 @@ final class Dispatcher
 
     public function dispatch(Opcode $opcode)
     {
+        $worker = $this->match($opcode);
+        $worker->execute($opcode);
+    }
+
+    public function match(Opcode $opcode): AbstractWorker
+    {
         foreach ($this->workers as $worker) {
             if ($worker->match($opcode)) {
-                $worker->execute($opcode);
-
-                return;
+                return $worker;
             }
         }
 

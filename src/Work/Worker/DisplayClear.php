@@ -22,4 +22,9 @@ final class DisplayClear extends AbstractWorker
 
         $this->engine->incrementProgramCounter();
     }
+
+    public function getPseudocode(Opcode $opcode): string
+    {
+        return 'disp_clear();';
+    }
 }

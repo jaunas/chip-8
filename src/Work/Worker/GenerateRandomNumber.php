@@ -21,4 +21,9 @@ final class GenerateRandomNumber extends AbstractWorker
         $this->engine->registers[$opcode->getX()] = rand(0x00, 0xFF) & $opcode->getNN();
         $this->engine->incrementProgramCounter();
     }
+
+    public function getPseudocode(Opcode $opcode): string
+    {
+        return sprintf('V%s = rand() & %s;', $opcode->getX(), $opcode->getNN());
+    }
 }

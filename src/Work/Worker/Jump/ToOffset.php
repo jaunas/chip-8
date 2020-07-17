@@ -21,4 +21,9 @@ final class ToOffset extends AbstractWorker
     {
         $this->engine->programCounter = $this->engine->registers[0] + $opcode->getNNN();
     }
+
+    public function getPseudocode(Opcode $opcode): string
+    {
+        return sprintf('goto V0 + %s;', $opcode->getNNN());
+    }
 }

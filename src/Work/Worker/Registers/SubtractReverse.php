@@ -32,4 +32,9 @@ final class SubtractReverse extends AbstractWorker
 
         $this->engine->incrementProgramCounter();
     }
+
+    public function getPseudocode(Opcode $opcode): string
+    {
+        return sprintf('V%s = V%s - V%s;', $opcode->getX(), $opcode->getY(), $opcode->getX());
+    }
 }

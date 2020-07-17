@@ -25,4 +25,9 @@ final class ShiftLeft extends AbstractWorker
 
         $this->engine->incrementProgramCounter();
     }
+
+    public function getPseudocode(Opcode $opcode): string
+    {
+        return sprintf('V%s <<= 1', $opcode->getX());
+    }
 }

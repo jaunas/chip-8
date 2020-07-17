@@ -21,4 +21,9 @@ final class To extends AbstractWorker
     {
         $this->engine->programCounter = $opcode->getNNN();
     }
+
+    public function getPseudocode(Opcode $opcode): string
+    {
+        return sprintf('goto %s;', $opcode->getNNN());
+    }
 }

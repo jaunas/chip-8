@@ -25,4 +25,9 @@ final class SkipNotEqual extends AbstractWorker
 
         $this->engine->incrementProgramCounter();
     }
+
+    public function getPseudocode(Opcode $opcode): string
+    {
+        return sprintf('if (V%s != %s) skip;', $opcode->getX(), $opcode->getNN());
+    }
 }
