@@ -13,6 +13,7 @@ services:
     calls:
       - [add, ['@Jaunas\Chip8\Command\Run']]
       - [add, ['@Jaunas\Chip8\Command\Translate']]
+      - [add, ['@Jaunas\Chip8\Command\Draw']]
 
   Jaunas\Chip8\Work\Worker\:
     resource: 'src/Work/Worker/*'
