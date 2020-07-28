@@ -1,0 +1,26 @@
+{
+  "code": [
+    {
+      "begin": 512,
+      "end": 630
+    }
+  ],
+  "sprites": [
+    {
+      "index": 632,
+      "height": 6
+    },
+    {
+      "index": 638,
+      "height": 6
+    },
+    {
+      "index": 644,
+      "height": 6
+    },
+    {
+      "index": 650,
+      "height": 6
+    }
+  ]
+}

@@ -4,7 +4,7 @@ namespace Jaunas\Chip8\Tests\Unit;
 
 use Jaunas\Chip8\DataType\Memory;
 use Jaunas\Chip8\Emulator;
-use PHPUnit\Framework\TestCase;
+use Jaunas\Chip8\Tests\TestCase;
 
 class EmulatorTest extends TestCase
 {
@@ -13,7 +13,8 @@ class EmulatorTest extends TestCase
     {
         $programPath = __DIR__ . '/../../examples/Zero Demo.ch8';
 
-        $emulator = new Emulator();
+        /** @var Emulator $emulator */
+        $emulator = $this->container->get(Emulator::class);
         $emulator->loadProgramFromFile(__DIR__ . '/../../examples/Zero Demo.ch8');
 
         $programString = file_get_contents($programPath);
