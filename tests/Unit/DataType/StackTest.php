@@ -60,6 +60,10 @@ class StackTest extends TestCase
                 ['pop', 90],
                 ['pop', 85],
                 ['pop', 75],
+            ]],
+            [[
+                ['push', 700],
+                ['pop', 700]
             ]]
         ];
     }

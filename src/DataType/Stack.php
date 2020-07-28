@@ -5,34 +5,28 @@ namespace Jaunas\Chip8\DataType;
 use Jaunas\Chip8\Exception\StackEmpty;
 use Jaunas\Chip8\Exception\StackFull;
 
-class Stack extends GenericMemory
+class Stack
 {
     const SIZE = 16;
 
-    /** @var int */
-    private $pointer = 0;
-
-    public function __construct()
-    {
-        parent::__construct(self::SIZE);
-    }
+    /** @var array */
+    private $stack = [];
 
     public function push(int $address)
     {
-        if ($this->pointer >= self::SIZE) {
+        if (sizeof($this->stack) >= self::SIZE) {
             throw new StackFull();
         }
 
-        $this[$this->pointer] = $address;
-        $this->pointer++;
+        array_push($this->stack, $address);
     }
 
     public function pop(): int
     {
-        if (0 == $this->pointer) {
+        if (empty($this->stack)) {
             throw new StackEmpty();
         }
 
-        return $this[--$this->pointer];
+        return array_pop($this->stack);
     }
 }
